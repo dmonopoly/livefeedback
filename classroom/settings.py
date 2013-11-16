@@ -36,6 +36,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'live_feedback',
+    'polls',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -51,10 +53,8 @@ ROOT_URLCONF = 'classroom.urls'
 
 WSGI_APPLICATION = 'classroom.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -65,6 +65,8 @@ DATABASES = {
         'PORT': '5432',
     }
 }
+
+TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
@@ -89,7 +91,10 @@ STATIC_URL = '/static/'
 
 # Parse database configuration from $DATABASE_URL
 import dj_database_url
-DATABASES['default'] =  dj_database_url.config()
+DATABASES['default'] = dj_database_url.config(default =
+    'postgres://classroom:pass@localhost/classroom_development')
+# DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql_psycopg2'
+
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
