@@ -204,7 +204,8 @@ function updateReadingsCallback(data){
 
 function stepTowardNeutral() {
   // TODO: Periodically update value to move toward neutral.
-
+  // Only do this if not neutral for efficiency...
+  Dajaxice.live_feedback.neutralizeByOneStep(updateReadingsCallback);
 }
 
 function onDocumentReady() {
@@ -212,9 +213,9 @@ function onDocumentReady() {
   
   updateReadings({{ mood_initial }});
 
-  //setInterval(function() {
-  //  stepTowardNeutral();
-  //}, 1 * 1000);
+  setInterval(function() {
+    stepTowardNeutral();
+  }, 3 * 1000);
 }
 
 if (!window.isLoaded) {
