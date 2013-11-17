@@ -1,6 +1,9 @@
-from django.utils import simplejson
+import json
 from dajaxice.decorators import dajaxice_register
+
+# from live_feedback.models import Event
+
 
 @dajaxice_register
 def sayhello(request):
-  return simplejson.dumps({'message':'Hello World'})
+  return json.dumps({'message':'Hello World'})
