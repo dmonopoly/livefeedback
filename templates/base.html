@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+{% load dajaxice_templatetags %}
+
+<html>
+  <head>
+    <title>Live Feedback</title>
+    {% dajaxice_js_import %}
+    {% block head %} {% endblock %}
+  </head>
+
+  <body>
+    In the base.
+    {% block content %}{% endblock %}
+  </body>
+</html>
