@@ -186,7 +186,7 @@ function onDocumentReady() {
   
   function updateReadings() {
     // TODO: just pump in random data here...
-    powerGauge.update(Math.random() * 10);
+    powerGauge.update("{{ x|length }}");
   }
   
   // Every few seconds update reading values

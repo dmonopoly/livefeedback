@@ -1,3 +1,7 @@
 from django.db import models
 
-# Create your models here.
+class Event(models.Model):
+  mood = models.FloatField()
+
+  def __unicode__(self):
+    return self.mood
