@@ -4,18 +4,17 @@
 <script
   src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
 <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-
-<script>
-  function my_js_callback(data){
-    alert(data.message);
-  }
-</script>
 {% endblock head %}
 
 {% block content %}
 <a href="javascript:void(0)"
-  onclick="Dajaxice.live_feedback.sayhello(my_js_callback);">
-  Hey there.
+  onclick="Dajaxice.live_feedback.increment(updateReadingsCallback);">
+  Increment.
+</a>
+
+<a href="javascript:void(0)"
+  onclick="Dajaxice.live_feedback.decrement(updateReadingsCallback);">
+  Decrement.
 </a>
 
 <div id="power-gauge"></div>
@@ -185,26 +184,36 @@ var gauge = function(container, configuration) {
 </script>
 
 <script>
+var powerGauge = gauge('#power-gauge', {
+  size: 500,
+  clipWidth: 500,
+  clipHeight: 500,
+  ringWidth: 90,
+  maxValue: 10,
+  transitionMs: 4000,
+});
+
+function updateReadings(mood_level) {
+  powerGauge.update(mood_level);
+}
+
+// Data has content from json.dumps in ajax.py.
+function updateReadingsCallback(data){
+  updateReadings(data.mood);
+}
+
+function stepTowardNeutral() {
+  // TODO: Periodically update value to move toward neutral.
+
+}
+
 function onDocumentReady() {
-  var powerGauge = gauge('#power-gauge', {
-    size: 300,
-    clipWidth: 300,
-    clipHeight: 300,
-    ringWidth: 60,
-    maxValue: 10,
-    transitionMs: 4000,
-  });
   powerGauge.render();
   
-  function updateReadings() {
-    // TODO: just pump in random data here...
-    powerGauge.update("{{ x }}");
-  }
-  
-  // Every few seconds update reading values
-  updateReadings();
+  updateReadings({{ mood_initial }});
+
   setInterval(function() {
-    updateReadings();
+    stepTowardNeutral();
   }, 1 * 1000);
 }
 
