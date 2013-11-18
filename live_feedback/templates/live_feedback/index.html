@@ -77,7 +77,7 @@ var gauge = function(container, configuration) {
     
     transitionMs        : 750,
     
-    majorTicks          : 5,
+    majorTicks          : 10,
     labelFormat         : d3.format(',g'),
     labelInset          : 10,
     
@@ -117,7 +117,7 @@ var gauge = function(container, configuration) {
     r = config.size / 2;
     pointerHeadLength = Math.round(r * config.pointerHeadLengthPercent);
 
-    // a linear scale that maps domain values to a percent from 0..1
+    // A linear scale that maps domain values to a percent from 0..1.
     scale = d3.scale.linear()
       .range([0,1])
       .domain([config.minValue, config.maxValue]);
@@ -242,11 +242,12 @@ function checkReading() {
   Dajaxice.live_feedback.checkToUpdateReading(updateReadingsCallback);
 }
 
-function stepTowardNeutral() {
-  // TODO: Periodically update value to move toward neutral.
-  // Only do this if not neutral for efficiency...
-  Dajaxice.live_feedback.neutralizeByOneStep(updateReadingsCallback);
-}
+// function stepTowardNeutral() {
+//   // TODO: Periodically update value to move toward neutral.
+//   // Only do this if not neutral for efficiency...
+//   // Shouldn't do this in the client - need universal clock.
+//   Dajaxice.live_feedback.neutralizeByOneStep(updateReadingsCallback);
+// }
 
 function onDocumentReady() {
   powerGauge.render();
@@ -256,10 +257,6 @@ function onDocumentReady() {
   setInterval(function() {
     checkReading();
   }, 2 * 1000);
-
-  // setInterval(function() {
-  //   stepTowardNeutral();
-  // }, 1 * 60 * 1000); // TODO: Probably shouldn't do in the client...
 }
 
 if (!window.isLoaded) {

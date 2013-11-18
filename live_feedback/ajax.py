@@ -26,13 +26,12 @@ def checkToUpdateReading(request):
   e = Event.objects.all()[0]
   return json.dumps({'mood': e.mood})
 
-@dajaxice_register
-def neutralizeByOneStep(request):
-  e = Event.objects.all()[0]
-  if e.mood < NEUTRAL:
-    e.mood += STEP
-  elif e.mood > NEUTRAL:
-    e.mood -= STEP
-  e.save()
-  return json.dumps({'mood': e.mood})
-
+# @dajaxice_register
+# def neutralizeByOneStep(request):
+#   e = Event.objects.all()[0]
+#   if e.mood < NEUTRAL:
+#     e.mood += STEP
+#   elif e.mood > NEUTRAL:
+#     e.mood -= STEP
+#   e.save()
+#   return json.dumps({'mood': e.mood})
