@@ -4,14 +4,9 @@
 <script
   src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
 <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<!--<link rel="stylesheet" href="{{ STATIC_URL }}live_feedback_styles.css" \>-->
 <style type="text/css">
-  .button {
-  -moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
-  -webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
-  box-shadow:inset 0px 1px 0px 0px #ffffff;
-  background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf) );
-  background:-moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% );
-  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf');
+.button {
   background-color:#ededed;
   -moz-border-radius:6px;
   -webkit-border-radius:6px;
@@ -20,15 +15,12 @@
   display:inline-block;
   color:#777777;
   font-family:arial;
-  font-size:15px;
+  font-size:60px;
   font-weight:bold;
   padding:6px 24px;
   text-decoration:none;
   text-shadow:1px 1px 0px #ffffff;
 }.button:hover {
-  background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #dfdfdf), color-stop(1, #ededed) );
-  background:-moz-linear-gradient( center top, #dfdfdf 5%, #ededed 100% );
-  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#dfdfdf', endColorstr='#ededed');
   background-color:#dfdfdf;
   cursor: pointer;
 }.button:active {
@@ -39,18 +31,18 @@
 {% endblock head %}
 
 {% block content %}
+<div id="power-gauge" style="text-align: center"></div>
+<!--The Buttons-->
 <div style="text-align: center">
   <a href="javascript:void(0)" class="button"
-    onclick="Dajaxice.live_feedback.increment(updateReadingsCallback);">
-    Increment.
-  </a>
-
-  <a href="javascript:void(0)" class="button"
     onclick="Dajaxice.live_feedback.decrement(updateReadingsCallback);">
-    Decrement.
+    Bad
+  </a>
+  <a href="javascript:void(0)" class="button"
+    onclick="Dajaxice.live_feedback.increment(updateReadingsCallback);">
+    Good
   </a>
 </div>
-<div id="power-gauge" style="text-align: center"></div>
 
 <!--Gauge setup-->
 <script type="text/javascript">
@@ -221,7 +213,7 @@ var gauge = function(container, configuration) {
 var powerGauge = gauge('#power-gauge', {
   size: 500,
   clipWidth: 500,
-  clipHeight: 500,
+  clipHeight: 300,
   ringWidth: 90,
   maxValue: 10,
   transitionMs: 4000,

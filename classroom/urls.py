@@ -1,4 +1,6 @@
 from django.conf.urls import patterns, include, url
+# from django.conf.urls.static import static
+
 # If X, X = "not using django.contrib.staticfiles"
 # from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
