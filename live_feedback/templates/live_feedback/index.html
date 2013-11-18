@@ -238,6 +238,10 @@ function updateReadingsCallback(data){
   updateReadings(data.mood);
 }
 
+function checkReading() {
+  Dajaxice.live_feedback.checkToUpdateReading(updateReadingsCallback);
+}
+
 function stepTowardNeutral() {
   // TODO: Periodically update value to move toward neutral.
   // Only do this if not neutral for efficiency...
@@ -248,6 +252,10 @@ function onDocumentReady() {
   powerGauge.render();
   
   updateReadings({{ mood_initial }});
+
+  setInterval(function() {
+    checkReading();
+  }, 2 * 1000);
 
   // setInterval(function() {
   //   stepTowardNeutral();

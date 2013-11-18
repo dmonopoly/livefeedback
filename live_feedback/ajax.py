@@ -22,6 +22,11 @@ def decrement(request):
   return json.dumps({'mood': e.mood})
 
 @dajaxice_register
+def checkToUpdateReading(request):
+  e = Event.objects.all()[0]
+  return json.dumps({'mood': e.mood})
+
+@dajaxice_register
 def neutralizeByOneStep(request):
   e = Event.objects.all()[0]
   if e.mood < NEUTRAL:
