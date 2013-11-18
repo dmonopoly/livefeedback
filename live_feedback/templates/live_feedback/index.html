@@ -249,9 +249,9 @@ function onDocumentReady() {
   
   updateReadings({{ mood_initial }});
 
-  setInterval(function() {
-    stepTowardNeutral();
-  }, 30 * 1000); // How quickly to revert back to neutral.
+  // setInterval(function() {
+  //   stepTowardNeutral();
+  // }, 1 * 60 * 1000); // TODO: Probably shouldn't do in the client...
 }
 
 if (!window.isLoaded) {

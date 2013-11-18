@@ -14,7 +14,6 @@ def increment(request):
   e.save()
   return json.dumps({'mood': e.mood})
 
-
 @dajaxice_register
 def decrement(request):
   e = Event.objects.all()[0]
